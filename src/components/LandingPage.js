@@ -4,6 +4,7 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Navbar from './navbar';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const LandingPage = () => {
     const [concertsData, setConcertsData] = useState([]);
@@ -54,26 +55,31 @@ const LandingPage = () => {
       </div>
       
       <div className="flex flex-col items-center min-h-screen p-4">
-      <div className="text-3xl font-semibold mt-7">Currently On Sale</div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 p-4">
+      <div className="text-3xl font-semibold mt-7 mb-4">Currently On Sale</div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-6xl">
           {concertsData.map((concert) => (
-            <Card className="flex flex-row m-4" key={concert.id} style={{ maxWidth: 600 }}>
+            <Card className="flex flex-col m-4" key={concert.id} style={{ maxWidth: 600 }}>
               <CardMedia
                 component="img"
-                sx={{ width: 200 }}
-                image="https://via.placeholder.com/150"
+                sx={{ height: 300 }}
+                image={concert.imageUrl || 'https://via.placeholder.com/300'} // Replace with actual image URL from data
                 alt={concert.event_name}
               />
-              <div className="flex flex-col justify-between w-full">
-                <CardContent>
-                  <Typography variant="h5">{concert.event_name}</Typography>
-                  <Typography variant="subtitle1">{concert.artist}</Typography>
-                  <Typography variant="body2">Promoter: {concert.promotor}</Typography>
-                  <Typography variant="body2">Seats Available: {concert.avail_seats}</Typography>
-                </CardContent>
-                <div className="flex justify-end p-2">
-                  <Button variant="outlined">Buy Now</Button>
-                </div>
+              <CardContent>
+                <Typography variant="h5">{concert.event_name}</Typography>
+                <Typography variant="subtitle1">{concert.artist}</Typography>
+                <Typography variant="body2">Promoter: {concert.promotor}</Typography>
+                <Typography variant="body2">Seats Available: {concert.avail_seats}</Typography>
+              </CardContent>
+              <div className="flex justify-end p-2">
+              <Button
+                  variant="outlined"
+                  component={Link}
+                  to={`/transaction/${concert.event_name}`}
+                >
+                  Buy Now
+                </Button>
+
               </div>
             </Card>
           ))}

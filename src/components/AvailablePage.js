@@ -28,10 +28,9 @@ const AvailablePage = () => {
 
   return (
     <div>
-       <Navbar />
       <div className="flex flex-col items-center p-4">
         
-        <h1 className="text-3xl font-bold mb-8 my-4">All Available Concerts</h1>
+        <div className="text-3xl font-semibold mb-4 my-4">All Available Concerts</div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-6xl">
           {concerts.map((concert) => (
