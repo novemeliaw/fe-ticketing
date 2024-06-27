@@ -11,11 +11,24 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const fetchUserProfile = async () => {
+      const userId = auth.user.id;
+      const url = `https://n9rqqp2jak.execute-api.us-east-1.amazonaws.com/prod/users/details?user_id=${userId}`;
+  
       if (auth.user) {
         try {
-          const response = await axios.get(`https://n9rqqp2jak.execute-api.us-east-1.amazonaws.com/prod/users/details?user_id=${auth.user.userId}`);
+          const response = await fetch(url, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          });
+          
           response = JSON.parse(response.body)
-          setUserProfile(response.data.profile);
+          const data = await response.json()
+          console.log(data)
+          
+          // setUserProfile(response.data.profile);
           setUserTickets(response.data.tickets);
         } catch (error) {
           console.error('Error fetching user profile:', error);
@@ -43,7 +56,7 @@ const ProfilePage = () => {
             <div className="flex flex-col justify-between w-full">
               <CardContent>
                 <Typography variant="h5">{userProfile.full_name}</Typography>
-                <Typography variant="subtitle1">{userProfile.email}</Typography>
+                <Typography variant="subtitle1">{userProfile.username}</Typography>
               </CardContent>
             </div>
           </Card>
