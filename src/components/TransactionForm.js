@@ -26,27 +26,37 @@ const TransactionFormPage = () => {
 
     // Prepare data for API call
     const formData = {
+      event_id,
       name,
       boughtSeats: parseInt(boughtSeats), // Ensure boughtSeats is converted to integer if necessary
       email,
     };
 
+    console.log(formData)
+
     try {
       // Example API endpoint URL
-      // const apiUrl = 'https://example.com/api/payment'; // Replace with your API endpoint
+      const apiUrl = 'https://l0e91qqwyg.execute-api.us-east-1.amazonaws.com/prod/purchase'; // Replace with your API endpoint
 
-      // // Perform POST request to API
-      // const response = await fetch(apiUrl, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(formData),
-      // });
+      // Perform POST request to API
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
 
-      // if (!response.ok) {
-      //   throw new Error('Failed to submit transaction');
-      // }
+      if (!response.ok) {
+        throw new Error('Failed to submit transaction');
+      }
+
+      const data = await response.json();
+      console.log(data);
+
+    
 
       // Reset form fields after successful submission
       setName('');

@@ -7,15 +7,36 @@ const ValidationPage = () => {
   const navigate = useNavigate();
   const { isAuthenticated } = useContext(AuthContext); // Get authentication state
 
-  const handleValidatePayment = () => {
-    // Perform validation logic here (e.g., API call)
-    alert('Payment validated successfully!'); // Example alert
+  const handleValidatePayment = async () => {
+    try {
+      const transactionId = 'your_transaction_id'; // Replace with actual transaction ID
+      const buttonPressed = true; // Simulate button press
 
-    // Redirect based on authentication state
-    if (isAuthenticated) {
-      navigate('/profile'); // Redirect to profile if authenticated
-    } else {
-      navigate('/'); // Redirect to home/landing if not authenticated
+      // Make API call to validate payment
+      const response = await fetch('your_lambda_endpoint_url', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ transactionId, buttonPressed }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to validate payment');
+      }
+
+      const data = await response.json();
+      alert(data.message); // Example alert
+
+      // Redirect based on authentication state
+      if (isAuthenticated) {
+        navigate('/profile'); // Redirect to profile if authenticated
+      } else {
+        navigate('/'); // Redirect to home/landing if not authenticated
+      }
+    } catch (error) {
+      console.error('Error validating payment:', error);
+      alert(`Error validating payment: ${error.message}`);
     }
   };
 
