@@ -51,7 +51,7 @@ const AvailablePage = () => {
               <Button
                   variant="outlined"
                   component={Link}
-                  to={`/transaction/${concert.event_name}`}
+                  to={`/transaction/${concert.event_name}/${concert.id}`}
                 >
                   Buy Now
                 </Button>

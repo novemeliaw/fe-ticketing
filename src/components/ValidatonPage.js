@@ -21,9 +21,9 @@ const ValidationPage = () => {
 
   return (
     <div>
-      <div className="flex flex-col items-center p-4 my-3">
-        <h1 className="text-3xl font-bold mb-8">Validation Page for Concert {event_name}</h1>
-        <p>Your transaction has been successfully submitted.</p>
+      <div className="flex flex-col items-center p-4 my-48">
+        <h1 className="text-3xl font-bold mb-5">Validate Payment for Concert {event_name}</h1>
+        <p>Your transaction has been successfully recorded.</p>
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
           onClick={handleValidatePayment}

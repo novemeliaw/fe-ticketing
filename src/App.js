@@ -9,6 +9,8 @@ import LoginPage from './components/LoginPage';
 import RegistrationPage from './components/RegistrationPage';
 import TransactionFormPage from './components/TransactionForm';
 import ValidationPage from './components/ValidatonPage';
+import EventFormPage from './components/EventFormPage';
+
 
 export const AuthContext = createContext();
 
@@ -24,9 +26,10 @@ const App = () => {
           <Route path="/profile" element={<ProtectedRoute component={ProfilePage} />} />
           <Route path="/available" element={<AvailablePage />} />
           <Route path="/add-event" element={<ProtectedRoute component={AddEventPage} />} />
+          <Route path="/create-event" element={<ProtectedRoute component={EventFormPage} />}  />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegistrationPage />} />
-          <Route path="/transaction/:event_name" element={<TransactionFormPage />} />
+          <Route path="/transaction/:event_name/:event_id" element={<TransactionFormPage />} />
           <Route path="/validate/:event_name" element={<ValidationPage />} />
         </Routes>
       </Router>

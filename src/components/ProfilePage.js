@@ -23,15 +23,14 @@ const ProfilePage = () => {
               'Content-Type': 'application/json',
             }
           });
-          
-          response = JSON.parse(response.body)
+      
           const data = await response.json()
           console.log(data)
           
-          // setUserProfile(response.data.profile);
-          setUserTickets(response.data.tickets);
-        } catch (error) {
-          console.error('Error fetching user profile:', error);
+          setUserProfile(data);
+          // setUserTickets(response.data.tickets);
+          } catch (error) {
+            console.error('Error fetching user profile:', error);
         }
       }
     };
@@ -55,8 +54,9 @@ const ProfilePage = () => {
             />
             <div className="flex flex-col justify-between w-full">
               <CardContent>
-                <Typography variant="h5">{userProfile.full_name}</Typography>
+                <Typography variant="h4">{userProfile.full_name}</Typography>
                 <Typography variant="subtitle1">{userProfile.username}</Typography>
+                <Typography variant="subtitle1">{userProfile.email}</Typography>
               </CardContent>
             </div>
           </Card>

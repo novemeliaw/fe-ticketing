@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { TextField, Button, MenuItem, Select, InputLabel, FormControl, FormHelperText } from '@mui/material';
 
 const TransactionFormPage = () => {
-  const { event_name } = useParams();
+  const { event_id, event_name } = useParams();
   const navigate = useNavigate();
 
   const [name, setName] = useState('');
@@ -29,7 +29,6 @@ const TransactionFormPage = () => {
       name,
       boughtSeats: parseInt(boughtSeats), // Ensure boughtSeats is converted to integer if necessary
       email,
-      selectedSeats,
     };
 
     try {
@@ -100,7 +99,7 @@ const TransactionFormPage = () => {
             />
           </div>
           
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <FormControl fullWidth required error={selectedSeats.length > boughtSeats}>
               <InputLabel id="selected-seats-label">Select Seats (Max {boughtSeats})</InputLabel>
               <Select
@@ -125,7 +124,7 @@ const TransactionFormPage = () => {
                 <FormHelperText>Selected seats cannot exceed bought seats</FormHelperText>
               )}
             </FormControl>
-          </div>
+          </div> */}
           {error && <p className="text-red-500 mb-4">{error}</p>}
           <div className="flex items-center justify-between">
             <Button
